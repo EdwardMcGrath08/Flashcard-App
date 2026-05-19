@@ -29,6 +29,7 @@ function App() {
   }, []);
 
   const card = flashcards[current];
+  const pad = (n) => String(n).padStart(2, '0');
 
   const next = () => {
     setShowAnswer(false);
@@ -42,6 +43,7 @@ function App() {
 
   return (
     <div style={styles.wrap}>
+      <p style={styles.label}>// Neural uplink v2.0.7.7</p>
       <h1 style={styles.title}>Flashcards</h1>
 
       {card ? (
@@ -50,24 +52,26 @@ function App() {
             {showAnswer ? card.back : card.front}
           </p>
           <p style={styles.hint}>
-            {showAnswer ? "Click to hide answer" : "Click to reveal answer"}
+            {showAnswer ? "[ tap to hide ]" : "[ tap to reveal ]"}
           </p>
         </div>
       ) : (
         <div style={styles.card}>
-          <p style={styles.cardText}>Loading flashcards...</p>
+          <p style={styles.cardText}>Jacking in...</p>
         </div>
       )}
 
       {flashcards.length > 0 && (
         <p style={styles.counter}>
-          Card {current + 1} of {flashcards.length}
+          CARD_{pad(current + 1)} / {pad(flashcards.length)}
         </p>
       )}
 
+      <hr style={styles.divider} />
+
       <div style={styles.btnRow}>
-        <button style={styles.btn} onClick={prev}>Previous</button>
-        <button style={styles.btn} onClick={next}>Next</button>
+        <button style={styles.btn} onClick={prev}>&#171; Prev</button>
+        <button style={styles.btn} onClick={next}>Next &#187;</button>
       </div>
     </div>
   );
@@ -75,29 +79,40 @@ function App() {
 
 const styles = {
   wrap: {
-    background: "#EEEDFE",
-    borderRadius: "16px",
+    background: "#0d0d0f",
+    border: "1px solid #FCE803",
+    borderRadius: "4px",
     padding: "2rem",
-    minHeight: "340px",
+    minHeight: "360px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     gap: "1.5rem",
-    fontFamily: "sans-serif",
+    fontFamily: "'Rajdhani', sans-serif",
   },
-  title: {
-    color: "#3C3489",
-    fontSize: "22px",
-    fontWeight: 500,
+  label: {
+    fontFamily: "'Share Tech Mono', monospace",
+    fontSize: "11px",
+    color: "#00d4ff",
+    letterSpacing: "3px",
+    textTransform: "uppercase",
     margin: 0,
   },
+  title: {
+    color: "#FCE803",
+    fontSize: "28px",
+    fontWeight: 700,
+    margin: 0,
+    letterSpacing: "2px",
+    textTransform: "uppercase",
+  },
   card: {
-    background: "#fff",
-    border: "1.5px solid #AFA9EC",
-    borderRadius: "14px",
+    background: "#111114",
+    border: "1px solid #FCE803",
+    borderRadius: "2px",
     width: "100%",
     maxWidth: "480px",
-    minHeight: "160px",
+    minHeight: "170px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -109,33 +124,47 @@ const styles = {
   },
   cardText: {
     margin: 0,
-    color: "#3C3489",
-    fontSize: "18px",
+    color: "#f0f0f0",
+    fontSize: "20px",
     fontWeight: 500,
   },
   hint: {
     margin: "12px 0 0",
-    color: "#7F77DD",
-    fontSize: "13px",
+    color: "#00d4ff",
+    fontSize: "12px",
+    fontFamily: "'Share Tech Mono', monospace",
+    letterSpacing: "1px",
   },
   counter: {
     margin: 0,
-    color: "#534AB7",
-    fontSize: "13px",
+    color: "#888",
+    fontSize: "12px",
+    fontFamily: "'Share Tech Mono', monospace",
+    letterSpacing: "2px",
+  },
+  divider: {
+    width: "100%",
+    maxWidth: "480px",
+    border: "none",
+    borderTop: "1px solid #222",
+    margin: 0,
   },
   btnRow: {
     display: "flex",
     gap: "12px",
   },
   btn: {
-    background: "#7F77DD",
-    border: "none",
-    borderRadius: "8px",
-    color: "#fff",
-    fontSize: "14px",
-    fontWeight: 500,
-    padding: "0 22px",
-    height: "38px",
+    background: "#111114",
+    border: "1px solid #FCE803",
+    borderRadius: "2px",
+    color: "#FCE803",
+    fontSize: "13px",
+    fontWeight: 700,
+    fontFamily: "'Rajdhani', sans-serif",
+    letterSpacing: "2px",
+    textTransform: "uppercase",
+    padding: "0 24px",
+    height: "40px",
     cursor: "pointer",
   },
 };
